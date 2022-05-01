@@ -27,18 +27,18 @@ public class PersistentAccountDAO implements AccountDAO {
         SQLiteDatabase db = this.databaseHelper.getReadableDatabase();
         Cursor cursor = db.query(
                 DatabaseHelper.ACCOUNT_TABLE,
-                new String[]{DatabaseHelper.COLUMN_ACCOUNT_NO},
+                new String[] { DatabaseHelper.COLUMN_ACCOUNT_NO },
                 null,
                 null,
                 null,
                 null,
-                null
-                );
+                null);
 
         while (cursor.moveToNext()) {
             String accountID = cursor.getString(0);
             accountNumbersList.add(accountID);
-        };
+        }
+        ;
         cursor.close();
         return accountNumbersList;
     }
@@ -53,8 +53,7 @@ public class PersistentAccountDAO implements AccountDAO {
                 null,
                 null,
                 null,
-                null
-        );
+                null);
         List<Account> accountsList = new ArrayList<>();
         while (cursor.moveToNext()) {
             String accountNo = cursor.getString(0);
@@ -75,7 +74,7 @@ public class PersistentAccountDAO implements AccountDAO {
                 DatabaseHelper.ACCOUNT_TABLE,
                 null,
                 DatabaseHelper.COLUMN_ACCOUNT_NO + "=?",
-                new String[]{accountNo},
+                new String[] { accountNo },
                 null,
                 null,
                 null);
@@ -85,8 +84,7 @@ public class PersistentAccountDAO implements AccountDAO {
                     cursor.getString(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getDouble(3)
-            );
+                    cursor.getDouble(3));
             cursor.close();
             db.close();
             return account;
@@ -115,8 +113,7 @@ public class PersistentAccountDAO implements AccountDAO {
         db.delete(
                 DatabaseHelper.ACCOUNT_TABLE,
                 DatabaseHelper.COLUMN_ACCOUNT_NO + "=?",
-                new String[]{accountNo}
-        );
+                new String[] { accountNo });
     }
 
     @Override
@@ -139,7 +136,6 @@ public class PersistentAccountDAO implements AccountDAO {
                 DatabaseHelper.ACCOUNT_TABLE,
                 cv,
                 DatabaseHelper.COLUMN_ACCOUNT_NO + "=?",
-                new String[]{accountNo}
-                );
+                new String[] { accountNo });
     }
 }

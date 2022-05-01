@@ -47,8 +47,7 @@ public class PersistentTransactionDAO implements TransactionDAO {
                 null,
                 null,
                 null,
-                null
-        );
+                null);
         if (cursor.moveToFirst()) {
             while (cursor.moveToNext()) {
                 String accountNo = cursor.getString(0);
@@ -61,11 +60,12 @@ public class PersistentTransactionDAO implements TransactionDAO {
                             new SimpleDateFormat("dd-MM-yyyy").parse(date),
                             accountNo,
                             ExpenseType.valueOf(expenseType),
-                            amount
-                    );
+                            amount);
                     transactionsList.add(transaction);
-                } catch (Exception e) {}
-            } ;
+                } catch (Exception e) {
+                }
+            }
+            ;
         }
         cursor.close();
         return transactionsList;
@@ -82,8 +82,7 @@ public class PersistentTransactionDAO implements TransactionDAO {
                 null,
                 null,
                 null,
-                Integer.toString(limit)
-        );
+                Integer.toString(limit));
         List<Transaction> transactionsList = new ArrayList<>();
         while (cursor.moveToNext()) {
             String accountNo = cursor.getString(0);
@@ -96,10 +95,10 @@ public class PersistentTransactionDAO implements TransactionDAO {
                         new SimpleDateFormat("dd-MM-yyyy").parse(date),
                         accountNo,
                         ExpenseType.valueOf(expenseType),
-                        amount
-                );
+                        amount);
                 transactionsList.add(transaction);
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
         cursor.close();
         return transactionsList;

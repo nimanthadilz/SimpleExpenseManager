@@ -13,6 +13,7 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.ui.MainActivity;
 
 public class PersistentDemoExpenseManager extends ExpenseManager {
     private Context context;
+
     public PersistentDemoExpenseManager(Context context) {
         this.context = context;
         setup();
