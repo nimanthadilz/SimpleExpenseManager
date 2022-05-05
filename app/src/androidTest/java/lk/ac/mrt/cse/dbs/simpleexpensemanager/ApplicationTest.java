@@ -17,6 +17,7 @@
 package lk.ac.mrt.cse.dbs.simpleexpensemanager;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import android.content.Context;
 
@@ -27,9 +28,12 @@ import org.junit.Test;
 
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.ExpenseManager;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.PersistentDemoExpenseManager;
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.exception.InvalidAccountException;
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.ExpenseType;
 
 /**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
+ * <a href="http://d.android.com/tools/testing/testing_android.html">Testing
+ * Fundamentals</a>
  */
 public class ApplicationTest {
     private static ExpenseManager expenseManager;
@@ -41,9 +45,20 @@ public class ApplicationTest {
     }
 
     @Test
-    public void testBasic() {
-        assertEquals(2, expenseManager.getAccountNumbersList() .size());
-        expenseManager.addAccount("123", "ABC", "Kamal", 5000);
+    public void testAddNewAccount() {
+        assertEquals(2, expenseManager.getAccountNumbersList().size());
+        expenseManager.addAccount("190", "BOC", "Kamal", 5000);
         assertEquals(3, expenseManager.getAccountNumbersList().size());
+    }
+
+    @Test
+    public void testAddNewTransaction() {
+        assertEquals(0, expenseManager.getTransactionLogs().size());
+        try {
+            expenseManager.updateAccountBalance("12345A", 05, 05, 2022, ExpenseType.EXPENSE, "500");
+        } catch (InvalidAccountException e) {
+            fail();
+        }
+        assertEquals(1, expenseManager.getTransactionLogs().size());
     }
 }
