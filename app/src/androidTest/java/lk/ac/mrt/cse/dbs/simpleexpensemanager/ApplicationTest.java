@@ -16,9 +16,13 @@
 
 package lk.ac.mrt.cse.dbs.simpleexpensemanager;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
+import static org.junit.Assert.assertEquals;
 
+import android.content.Context;
+
+import androidx.test.core.app.ApplicationProvider;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.ExpenseManager;
@@ -27,16 +31,13 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.PersistentDemoExpenseManag
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
-public class ApplicationTest extends ApplicationTestCase<Application> {
-    private ExpenseManager expenseManager;
-    public ApplicationTest() {
-        super(Application.class);
-    }
+public class ApplicationTest {
+    private static ExpenseManager expenseManager;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        expenseManager = new PersistentDemoExpenseManager(mContext);
+    @BeforeClass
+    public static void setUp() {
+        Context context = ApplicationProvider.getApplicationContext();
+        expenseManager = new PersistentDemoExpenseManager(context);
     }
 
     @Test
