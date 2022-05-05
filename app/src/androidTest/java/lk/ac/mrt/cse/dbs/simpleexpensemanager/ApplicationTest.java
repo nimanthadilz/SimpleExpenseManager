@@ -19,11 +19,30 @@ package lk.ac.mrt.cse.dbs.simpleexpensemanager;
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
+import org.junit.Test;
+
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.ExpenseManager;
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.PersistentDemoExpenseManager;
+
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
 public class ApplicationTest extends ApplicationTestCase<Application> {
+    private ExpenseManager expenseManager;
     public ApplicationTest() {
         super(Application.class);
+    }
+
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        expenseManager = new PersistentDemoExpenseManager(mContext);
+    }
+
+    @Test
+    public void testBasic() {
+        assertEquals(2, expenseManager.getAccountNumbersList() .size());
+        expenseManager.addAccount("123", "ABC", "Kamal", 5000);
+        assertEquals(3, expenseManager.getAccountNumbersList().size());
     }
 }
